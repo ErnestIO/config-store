@@ -6,8 +6,8 @@ This service is responsible for allowing other service to access configuration d
 
 ## Build status
 
-* Master: [![CircleCI Master](https://circleci.com/gh/r3labs/config-store/tree/master.svg?style=svg&circle-token=c35949873ba8446830fea657bed0ced14c23bd7d)](https://circleci.com/gh/r3labs/config-store/tree/master)
-* Develop: [![CircleCI Develop](https://circleci.com/gh/r3labs/config-store/tree/develop.svg?style=svg&circle-token=c35949873ba8446830fea657bed0ced14c23bd7d)](https://circleci.com/gh/r3labs/config-store/tree/develop)
+* Master: [![CircleCI](https://circleci.com/gh/ErnestIO/config-store/tree/master.svg?style=svg)](https://circleci.com/gh/ErnestIO/config-store/tree/master)
+* Develop: [![CircleCI](https://circleci.com/gh/ErnestIO/config-store/tree/develop.svg?style=svg)](https://circleci.com/gh/ErnestIO/config-store/tree/develop)
 
 
 ## Usage
