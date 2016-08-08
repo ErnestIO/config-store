@@ -13,6 +13,7 @@ import (
 	"runtime"
 	"strings"
 
+	ecc "github.com/ernestio/ernest-config-client"
 	"github.com/nats-io/nats"
 )
 
@@ -50,21 +51,13 @@ func loadServiceConfig(service string, configPath string) []byte {
 
 func main() {
 	var configPath string
+
 	flag.StringVar(&configPath, "config", "config.json", "The path to the shared config file")
 	flag.Parse()
 
-	natsURI := os.Getenv("NATS_URI")
-	if natsURI == "" {
-		log.Panic("No NATS_URI specified")
-	}
+	log.Println("Starting ...")
 
-	log.Println("starting")
-
-	n, err := nats.Connect(natsURI)
-	if err != nil {
-		log.Panic(err)
-	}
-
+	n := ecc.NewConfig(os.Getenv("NATS_URI")).Nats()
 	n.Subscribe("config.get.*", func(msg *nats.Msg) {
 		service := extractService(msg.Subject)
 		data := loadServiceConfig(service, configPath)
