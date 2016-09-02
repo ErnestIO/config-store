@@ -13,11 +13,11 @@ test:
 
 deps: dev-deps
 	go get github.com/nats-io/nats
-	go get -u github.com/ernestio/ernest-config-client
+	go get github.com/ernestio/ernest-config-client
 
 dev-deps:
-	go get -u github.com/golang/lint/golint
-	go get -u github.com/smartystreets/goconvey/convey
+	go get github.com/golang/lint/golint
+	go get github.com/smartystreets/goconvey/convey
 
 clean:
 	go clean
