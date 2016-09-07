@@ -6,8 +6,8 @@ This service is responsible for allowing other service to access configuration d
 
 ## Build status
 
-* Master: [![CircleCI](https://circleci.com/gh/ErnestIO/config-store/tree/master.svg?style=svg)](https://circleci.com/gh/ErnestIO/config-store/tree/master)
-* Develop: [![CircleCI](https://circleci.com/gh/ErnestIO/config-store/tree/develop.svg?style=svg)](https://circleci.com/gh/ErnestIO/config-store/tree/develop)
+* Master: [![CircleCI](https://circleci.com/gh/ernestio/config-store/tree/master.svg?style=svg)](https://circleci.com/gh/ernestio/config-store/tree/master)
+* Develop: [![CircleCI](https://circleci.com/gh/ernestio/config-store/tree/develop.svg?style=svg)](https://circleci.com/gh/ernestio/config-store/tree/develop)
 
 
 ## Usage
