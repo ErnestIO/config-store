@@ -1,8 +1,15 @@
+machine:
+  environment:
+    ROOTPATH: /home/ubuntu/.go_workspace/src/github.com/ernestio
 dependencies:
   pre:
+    - mkdir -p $ROOTPATH/
+    - rm -rf $ROOTPATH/toolset/ && git clone git@github.com:ernestio/toolset.git $ROOTPATH/toolset/
+    - cd $ROOTPATH/toolset/ernestci/ && bundle install
     - make deps
 
 test:
   override:
     - make lint
+    - ruby $ROOTPATH/toolset/ernestci/run.rb .ernest-ci
     - make test
