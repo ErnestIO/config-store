@@ -1,14 +1,11 @@
 # Config Store
 
+master:  [![CircleCI](https://circleci.com/gh/ernestio/config-store/tree/master.svg?style=shield)](https://circleci.com/gh/ernestio/config-store/tree/master)  
+develop: [![CircleCI](https://circleci.com/gh/ernestio/config-store/tree/develop.svg?style=shield)](https://circleci.com/gh/ernestio/config-store/tree/develop)
+
 ## Synopsis
 
 This service is responsible for allowing other service to access configuration data for shared resources like databases and message queues.
-
-## Build status
-
-* Master: [![CircleCI](https://circleci.com/gh/ernestio/config-store/tree/master.svg?style=svg)](https://circleci.com/gh/ernestio/config-store/tree/master)
-* Develop: [![CircleCI](https://circleci.com/gh/ernestio/config-store/tree/develop.svg?style=svg)](https://circleci.com/gh/ernestio/config-store/tree/develop)
-
 
 ## Usage
 
