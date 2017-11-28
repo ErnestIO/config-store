@@ -5,49 +5,13 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
-	"io/ioutil"
 	"log"
 	"os"
 	"runtime"
-	"strings"
 
 	ecc "github.com/ernestio/ernest-config-client"
-	"github.com/nats-io/nats"
 )
-
-// Config stores all configuration for redis
-type Config map[string]interface{}
-
-func errCheck(err error) {
-	if err != nil {
-		log.Panic("Error: ", err)
-	}
-}
-
-func extractService(subject string) string {
-	s := strings.Split(subject, ".")
-	return s[len(s)-1]
-}
-
-func loadServiceConfig(service string, configPath string) []byte {
-	c := Config{}
-
-	file, err := os.Open(configPath)
-	errCheck(err)
-
-	data, err := ioutil.ReadAll(file)
-	errCheck(err)
-
-	err = json.Unmarshal(data, &c)
-	errCheck(err)
-
-	data, err = json.Marshal(c[service])
-	errCheck(err)
-
-	return data
-}
 
 func main() {
 	var configPath string
@@ -55,15 +19,16 @@ func main() {
 	flag.StringVar(&configPath, "config", "config.json", "The path to the shared config file")
 	flag.Parse()
 
-	log.Println("Starting ...")
+	c := ecc.NewConfig(os.Getenv("NATS_URI"))
+	n := c.Nats()
 
-	n := ecc.NewConfig(os.Getenv("NATS_URI")).Nats()
-	n.Subscribe("config.get.*", func(msg *nats.Msg) {
-		service := extractService(msg.Subject)
-		data := loadServiceConfig(service, configPath)
-		n.Publish(msg.Reply, data)
-	})
+	h := Handler{Nats: n, ConfigPath: configPath}
+
+	log.Println("Started")
+
+	n.Subscribe("config.get.*", h.ConfigGet)
+	n.Subscribe("config.set.*", h.ConfigSet)
 
 	runtime.Goexit()
-	log.Println("exiting")
+	log.Println("Stopped")
 }
