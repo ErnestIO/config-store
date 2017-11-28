@@ -1,0 +1,22 @@
+{
+  "postgres": {
+    "names": [
+      "users",
+      "clients",
+      "datacenters",
+      "services"
+    ],
+    "user": "foo",
+    "password": "bar",
+    "url": "postgres://foo:bar@127.0.0.1"
+  },
+  "logstash": {
+    "hostname": "ernest.local",
+    "port": 5000,
+    "timeout": 50000
+  },
+  "monitor": {
+    "host": "127.0.0.1",
+    "port": "22000"
+  }
+}
