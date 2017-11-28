@@ -28,12 +28,12 @@ func TestExtractService(t *testing.T) {
 	})
 }
 
-func TestLoadServiceConfig(t *testing.T) {
+func TestGetServiceConfig(t *testing.T) {
 	Convey("Given a valid configuration fixture", t, func() {
-		configPath := "./fixtures/config.json"
+		configPath := "./test/fixtures/config.json"
 		Convey("Load a service configuration correctly", func() {
-			service := loadServiceConfig("salt", configPath)
-			So(string(service), ShouldEqual, "{\"password\":\"bar\",\"user\":\"foo\"}")
+			service := getServiceConfig("monitor", configPath)
+			So(string(service), ShouldEqual, `{"host":"127.0.0.1","port":"22000"}`)
 		})
 	})
 }

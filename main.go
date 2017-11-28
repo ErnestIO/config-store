@@ -26,8 +26,15 @@ func main() {
 
 	log.Println("Started")
 
-	n.Subscribe("config.get.*", h.ConfigGet)
-	n.Subscribe("config.set.*", h.ConfigSet)
+	_, err := n.Subscribe("config.get.*", h.ConfigGet)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	_, err = n.Subscribe("config.set.*", h.ConfigSet)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	runtime.Goexit()
 	log.Println("Stopped")

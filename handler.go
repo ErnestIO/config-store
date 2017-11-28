@@ -15,21 +15,32 @@ import (
 	"github.com/r3labs/akira"
 )
 
+// Handler describes a NATS handler and its dependencies.
 type Handler struct {
 	Nats       akira.Connector
 	ConfigPath string
 }
 
+// ConfigGet handles requests to config.get.*
 func (h *Handler) ConfigGet(msg *nats.Msg) {
 	service := extractService(msg.Subject)
 	data := getServiceConfig(service, h.ConfigPath)
-	h.Nats.Publish(msg.Reply, data)
+	err := h.Nats.Publish(msg.Reply, data)
+	if err != nil {
+		log.Println(err)
+	}
+
 }
 
+// ConfigSet handles requests to config.set.*
 func (h *Handler) ConfigSet(msg *nats.Msg) {
 	service := extractService(msg.Subject)
 	data := setServiceConfig(service, h.ConfigPath, msg.Data)
-	h.Nats.Publish(msg.Reply, data)
+	err := h.Nats.Publish(msg.Reply, data)
+	if err != nil {
+		log.Println(err)
+	}
+
 }
 
 func extractService(subject string) string {
