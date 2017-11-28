@@ -1,23 +1,22 @@
-install:
-	go install -v
-
-build:
-	go build -v ./...
+deps:
+	@go get github.com/golang/dep/cmd/dep
+	@dep ensure
 
 lint:
-	golint ./...
-	go vet ./...
+	@go get honnef.co/go/tools/cmd/megacheck
+	@go get github.com/alecthomas/gometalinter
+	@gometalinter --install > /dev/null
+	@gometalinter --vendor --disable-all --enable=errcheck --enable=golint --enable=megacheck --enable=vet ./...
 
+.PHONY: test
 test:
-	go test -v ./... --cover
+	@go test -v -cover ./...
 
-deps: dev-deps
-	go get github.com/nats-io/nats
-	go get github.com/ernestio/ernest-config-client
+install:
+	@go install -v
 
-dev-deps:
-	go get github.com/golang/lint/golint
-	go get github.com/smartystreets/goconvey/convey
+build:
+	@go build -v ./...
 
 clean:
-	go clean
+	@go clean

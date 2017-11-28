@@ -5,17 +5,27 @@ develop: [![CircleCI](https://circleci.com/gh/ernestio/config-store/tree/develop
 
 ## Synopsis
 
-This service is responsible for allowing other service to access configuration data for shared resources like databases and message queues.
+This service is responsible for allowing other service to access and set configuration data for shared resources like databases and message queues.
 
 ## Usage
 
-To make use of this to get configuration over nats, you can use `config.get.SERVICE`, where `SERVICE` is the name of the service you want to get configuration for.
+The getting and setting of Ernest configuration over NATS is dependant upon the structure of the NATS subject.
 
-This can be accomplished with go using:
+`config.get.<service name>` - gets the configuration for the specified service.
+`config.set.<service name>` - sets the configuration for the specified service.
+
+
+
+This can be accomplished in Go using:
 
 ```
+// get configuration for a service
 n, _ := nats.Connect(natsURI)
 resp, _ := n.Request("service.get.redis", nil, time.Second)
+
+// set configuration for a service
+n, _ := nats.Connect(natsURI)
+resp, _ := n.Request("service.set.redis", "{"hostname": "redis"}", time.Second)
 ```
 
 ## Installing
