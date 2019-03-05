@@ -6,7 +6,9 @@ lint:
 	@go get honnef.co/go/tools/cmd/megacheck
 	@go get github.com/alecthomas/gometalinter
 	@gometalinter --install > /dev/null
-	@gometalinter --vendor --disable-all --enable=errcheck --enable=golint --enable=staticcheck --enable=vet ./...
+	@gometalinter --vendor --disable-all --enable=errcheck --enable=golint --enable=vet ./...
+	# disabled staticcheck (aka megacheck)
+	#@gometalinter --vendor --disable-all --enable=errcheck --enable=golint --enable=staticcheck --enable=vet ./...
 
 .PHONY: test
 test:
